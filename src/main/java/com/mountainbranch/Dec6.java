@@ -1,45 +1,58 @@
 package com.mountainbranch;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class Dec6 {
-	public int solveProblem1(String[] input) {
-		int count = 0;
-		for (String line : input) {
-			if (isValid(line)) {
-				count++;
+	public int memoryReallocation1(String input) {
+		String[] inputArray = input.split("[\t ]+");
+		int[] memoryBank = new int[inputArray.length];
+		for (int i = 0; i < memoryBank.length; i++) {
+			memoryBank[i] = Integer.parseInt(inputArray[i]);
+		}
+		Set<String> previousConfigurations = new HashSet<String>();
+		previousConfigurations.add(memoryBankAsString(memoryBank));
+		
+		while (true) {
+			// Find largest memory bank
+			int index = 0;
+			int maxSize = 0;
+			for (int i = 0; i < memoryBank.length; i++) {
+				if (memoryBank[i] > maxSize) {
+					index = i;
+					maxSize = memoryBank[i];
+				}
+			}
+			
+			// Reallocate
+			int blocksToRedistribute = memoryBank[index];
+			memoryBank[index] = 0;
+			int blocksToEveryIndex = blocksToRedistribute / memoryBank.length;
+			for (int i = 0; i < memoryBank.length; i++) {
+				memoryBank[i] += blocksToEveryIndex;
+			}
+			blocksToRedistribute = blocksToRedistribute % memoryBank.length;
+			while (blocksToRedistribute > 0) {
+				index = (index+1) % memoryBank.length;
+				memoryBank[index]++;
+				blocksToRedistribute--;
+			}
+			
+			// If configuration has been seen before, return
+			if (!previousConfigurations.add(memoryBankAsString(memoryBank))) {
+				return previousConfigurations.size();
 			}
 		}
-		return count;
 	}
 	
-	private boolean isValid(String line) {
-		String[] words = line.split("[\t ]+");
-		
-		Set<String> wordSet = new HashSet<String>();
-		for (String word : words) {
-			wordSet.add(word);
+	private String memoryBankAsString(int[] memoryBank) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < memoryBank.length; i++) {
+			if (i > 0) {
+				sb.append(";");
+			}
+			sb.append(memoryBank[i]);
 		}
-		
-		Map<String, Integer> wordMap = new HashMap<String, Integer>();
-		for (String word : words) {
-			wordMap.put(word, getValueOfWord(word));
-		}
-		
-		return false;
-	}
-	
-	private Integer getValueOfWord(String word) {
-		// TODO Implement
-		return 0;
-	}
-	
-	
-	
-	public int solveProblem2(String[] input) {
-		return 0;
+		return sb.toString();
 	}
 }

@@ -12,9 +12,10 @@ public class Main {
 		Main main = new Main();
 		//main.dec1();
 		//main.dec2();
-		main.dec3();
+		//main.dec3();
 		//main.dec4();
-		main.dec5();
+		//main.dec5();
+		main.dec6();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -72,5 +73,12 @@ public class Main {
 		Dec5 dec5 = new Dec5();
 		System.out.println("Dec 5 (1): " + dec5.mazeOfTwistyTrampolines1(input));
 		System.out.println("Dec 5 (2): " + dec5.mazeOfTwistyTrampolines2(input));
+	}
+	
+	public void dec6() {
+		String[] input = resourceToStringArray("/input6");
+		Dec6 dec6 = new Dec6();
+		System.out.println("Dec 6 (1): " + dec6.memoryReallocation1(input[0]));
+		//System.out.println("Dec 6 (2): " + dec6.mazeOfTwistyTrampolines2(input));
 	}
 }
