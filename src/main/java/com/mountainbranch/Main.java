@@ -79,6 +79,6 @@ public class Main {
 		String[] input = resourceToStringArray("/input6");
 		Dec6 dec6 = new Dec6();
 		System.out.println("Dec 6 (1): " + dec6.memoryReallocation1(input[0]));
-		//System.out.println("Dec 6 (2): " + dec6.mazeOfTwistyTrampolines2(input));
+		System.out.println("Dec 6 (1): " + dec6.memoryReallocation2(input[0]));
 	}
 }
