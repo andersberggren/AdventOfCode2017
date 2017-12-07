@@ -15,7 +15,8 @@ public class Main {
 		//main.dec3();
 		//main.dec4();
 		//main.dec5();
-		main.dec6();
+		//main.dec6();
+		main.dec7();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -80,5 +81,12 @@ public class Main {
 		Dec6 dec6 = new Dec6();
 		System.out.println("Dec 6 (1): " + dec6.memoryReallocation1(input[0]));
 		System.out.println("Dec 6 (1): " + dec6.memoryReallocation2(input[0]));
+	}
+	
+	public void dec7() {
+		String[] input = resourceToStringArray("/input7");
+		Dec7 dec7 = new Dec7();
+		System.out.println("Dec 7 (1): " + dec7.solveProblem1(input));
+		System.out.println("Dec 7 (2): " + dec7.solveProblem2(input));
 	}
 }

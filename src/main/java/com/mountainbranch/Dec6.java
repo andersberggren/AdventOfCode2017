@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+// TODO Generalize the two versions. Inject only the behaviour that differs.
 public class Dec6 {
 	public int memoryReallocation1(String input) {
 		String[] inputArray = input.split("[\t ]+");
