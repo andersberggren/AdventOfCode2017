@@ -23,13 +23,6 @@ public class Dec7 {
 			}
 			tower.put(name, disc);
 		}
-
-		// Calculate total weight of each disc and its supported discs
-		for (Disc disc : tower.values()) {
-			if (disc.totalWeight == null) {
-				disc.totalWeight = getTotalWeight(disc);
-			}
-		}
 	}
 	
 	public String findBottomProgram() {
@@ -45,54 +38,49 @@ public class Dec7 {
 			}
 		}
 		
-		return "";
+		throw new RuntimeException("Could not find bottom program");
 	}
 	
 	public void findUnbalancedProgram() {
 		for (Disc disc : tower.values()) {
-			boolean ok = true;
-			boolean first = true;
-			int weight = 0;
+			Set<Integer> weights = new HashSet<Integer>();
 			for (String name : disc.supportedDiscs) {
-				Disc supportedDisc = tower.get(name);
-				if (first) {
-					weight = supportedDisc.totalWeight;
-					first = false;
-				}
-				if (supportedDisc.totalWeight != weight) {
-					ok = false;
-					break;
-				}
+				weights.add(tower.get(name).getTotalWeight());
 			}
 			
-			if (!ok) {
+			if (weights.size() > 1) {
 				System.out.println("Weights of " + disc.name + " are not equal!");
 				for (String name : disc.supportedDiscs) {
 					Disc supportedDisc = tower.get(name);
-					System.out.println(supportedDisc.name + ", " + supportedDisc.ownWeight + "/" + supportedDisc.totalWeight);
+					System.out.println(supportedDisc.name + ", " + supportedDisc.ownWeight
+							+ "/" + supportedDisc.getTotalWeight());
 				}
 			}
 		}
 	}
 	
-	private int getTotalWeight(Disc disc) {
-		int totalWeight = disc.ownWeight;
-		for (String supportedDisc : disc.supportedDiscs) {
-			totalWeight += getTotalWeight(tower.get(supportedDisc));
-		}
-		disc.totalWeight = totalWeight;
-		return totalWeight;
-	}
-
-	private static class Disc {
+	private class Disc {
 		public final String name;
 		public final List<String> supportedDiscs = new LinkedList<String>();
 		public final int ownWeight;
-		public Integer totalWeight;
+		private Integer totalWeight;
 		
 		public Disc(String name, int ownWeight) {
 			this.name = name;
 			this.ownWeight = ownWeight;
+		}
+		
+		public int getTotalWeight() {
+			if (totalWeight != null) {
+				return totalWeight;
+			}
+			
+			totalWeight = ownWeight;
+			for (String supportedDisc : supportedDiscs) {
+				totalWeight += tower.get(supportedDisc).getTotalWeight();
+			}
+			
+			return totalWeight;
 		}
 	}
 }
