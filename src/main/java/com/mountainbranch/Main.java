@@ -85,8 +85,9 @@ public class Main {
 	
 	public void dec7() {
 		String[] input = resourceToStringArray("/input7");
-		Dec7 dec7 = new Dec7();
-		System.out.println("Dec 7 (1): " + dec7.solveProblem1(input));
-		System.out.println("Dec 7 (2): " + dec7.solveProblem2(input));
+		Dec7 dec7 = new Dec7(input);
+		System.out.println("Dec 7 (1): " + dec7.findBottomProgram());
+		System.out.println("Dec 7 (2): ");
+		dec7.findUnbalancedProgram();
 	}
 }
