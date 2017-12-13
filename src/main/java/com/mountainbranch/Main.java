@@ -16,7 +16,8 @@ public class Main {
 		//main.dec4();
 		//main.dec5();
 		//main.dec6();
-		main.dec7();
+		//main.dec7();
+		main.dec8();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -89,5 +90,13 @@ public class Main {
 		System.out.println("Dec 7 (1): " + dec7.findBottomProgram());
 		System.out.println("Dec 7 (2): ");
 		dec7.findUnbalancedProgram();
+	}
+	
+	public void dec8() {
+		String[] input = resourceToStringArray("/input8");
+		Dec8 dec8 = new Dec8();
+		dec8.executeInstructions(input);
+		System.out.println("Dec 8 (1): " + dec8.getLargestRegisterValue());
+		System.out.println("Dec 8 (2): " + dec8.getLargestRegisterValueEverHeld());
 	}
 }
