@@ -17,7 +17,8 @@ public class Main {
 		//main.dec5();
 		//main.dec6();
 		//main.dec7();
-		main.dec8();
+		//main.dec8();
+		main.dec9();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -98,5 +99,11 @@ public class Main {
 		dec8.executeInstructions(input);
 		System.out.println("Dec 8 (1): " + dec8.getLargestRegisterValue());
 		System.out.println("Dec 8 (2): " + dec8.getLargestRegisterValueEverHeld());
+	}
+	
+	public void dec9() {
+		String[] input = resourceToStringArray("/input9");
+		Dec9 dec9 = new Dec9(input[0]);
+		System.out.println("Dec 9 (1): " + dec9.getTotalScore());
 	}
 }
