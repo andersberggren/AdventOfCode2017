@@ -105,5 +105,6 @@ public class Main {
 		String[] input = resourceToStringArray("/input9");
 		Dec9 dec9 = new Dec9(input[0]);
 		System.out.println("Dec 9 (1): " + dec9.getTotalScore());
+		System.out.println("Dec 9 (2): " + dec9.getTotalGarbage());
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 public class Dec9 {
 	private enum State {GROUP, GARBAGE};
 	private Group topGroup = null;
+	private int totalGarbage = 0;
 	
 	public Dec9(String input) {
 		parseGroups(input);
@@ -25,15 +26,22 @@ public class Dec9 {
 					Group newGroup = new Group(currentGroup);
 					currentGroup.children.add(newGroup);
 					currentGroup = newGroup;
+				} else {
+					totalGarbage++;
 				}
 				break;
 			case '}':
 				if (state == State.GROUP) {
 					// End of group
 					currentGroup = currentGroup.parent;
+				} else {
+					totalGarbage++;
 				}
 				break;
 			case '<':
+				if (state == State.GARBAGE) {
+					totalGarbage++;
+				}
 				state = State.GARBAGE;
 				break;
 			case '>':
@@ -43,17 +51,20 @@ public class Dec9 {
 				// Skip next char
 				i++;
 				break;
-			case ',':
-				// Do nothing
-				break;
 			default:
-				// Probably reading garbage here...
+				if (state == State.GARBAGE) {
+					totalGarbage++;
+				}
 			}
 		}
 	}
 	
 	public int getTotalScore() {
 		return topGroup.getTotalScore();
+	}
+	
+	public int getTotalGarbage() {
+		return totalGarbage;
 	}
 	
 	private class Group {
