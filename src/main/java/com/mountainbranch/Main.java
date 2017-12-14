@@ -19,7 +19,7 @@ public class Main {
 		//main.dec7();
 		//main.dec8();
 		//main.dec9();
-		//main.dec10();
+		main.dec10();
 		main.dec11();
 	}
 	

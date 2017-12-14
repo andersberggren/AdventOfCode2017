@@ -23,14 +23,18 @@ public class Dec10 {
 	}
 	
 	public String hash2(String input) {
+		// Convert each character in the input string to its ASCII value.
 		List<Integer> lengths = new LinkedList<Integer>();
 		for (char c : input.toCharArray()) {
 			lengths.add((int) c);
 		}
+		// Always append these values at the end
 		for (int i : new int[]{17, 31, 73, 47, 23}) {
 			lengths.add(i);
 		}
 		
+		// Do hash similar to hash1, but do it 64 times,
+		// keeping the index and skip size between rounds.
 		for (int i = 0; i < 64; i++) {
 			for (Integer length : lengths) {
 				reverseListSection(length);
@@ -39,17 +43,19 @@ public class Dec10 {
 		
 		// Convert sparse hash (256 numbers) into dense hash (16 numbers),
 		// by taking the XOR of each block of 16 numbers in the sparse hash.
-		int[] denseHash = new int[16];
-		for (int i = 0; i < LIST_SIZE; i++) {
-			denseHash[i/16] ^= list[i];
+		// The hash string is the hex value of every number in the dense hash
+		// (each number padded to 2 characters).
+		final int NUMBER_OF_BLOCKS = 16;
+		final int NUMBERS_PER_BLOCK = 16;
+		String hashStr = "";
+		for (int i = 0; i < NUMBER_OF_BLOCKS; i++) {
+			int hash = 0;
+			for (int k = i*NUMBERS_PER_BLOCK; k < (i+1)*NUMBERS_PER_BLOCK; k++) {
+				hash ^= list[k];
+			}
+			hashStr += String.format("%02x", hash);
 		}
-
-		// Output dense hash as a hex string (each number padded to 2 characters)
-		String hash = "";
-		for (int i : denseHash) {
-			hash += String.format("%02x", i);
-		}
-		return hash;
+		return hashStr;
 	}
 	
 	private void reverseListSection(int length) {
@@ -62,6 +68,7 @@ public class Dec10 {
 			frontIndex++;
 			backIndex--;
 		}
+		// Update currentIndex, and increment skipSize
 		currentIndex = (currentIndex + length + skipSize++) % LIST_SIZE;
 	}
 }
