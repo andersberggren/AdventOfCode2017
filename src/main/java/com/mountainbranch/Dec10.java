@@ -5,8 +5,9 @@ import java.util.List;
 
 public class Dec10 {
 	private static final int LIST_SIZE = 256;
-	
 	private final int[] list = new int[LIST_SIZE];
+	private int currentIndex = 0;
+	private int skipSize = 0;
 	
 	public Dec10() {
 		for (int i = 0; i < list.length; i++) {
@@ -14,89 +15,53 @@ public class Dec10 {
 		}
 	}
 	
-	public int hash(String input) {
-		int skipSize = 0;
-		int index = 0;
-		
+	public int hash1(String input) {
 		for (String lengthStr : input.split(",")) {
-			int length = Integer.parseInt(lengthStr);
-			
-			// Do the reversing
-			int frontIndex = index;
-			int backIndex = index+length-1;
-			while (frontIndex < backIndex) {
-				// Change values
-				int valueAtFrontIndex = list[frontIndex%LIST_SIZE];
-				list[frontIndex%LIST_SIZE] = list[backIndex%LIST_SIZE];
-				list[backIndex%LIST_SIZE] = valueAtFrontIndex;
-				
-				frontIndex++;
-				backIndex--;
-			}
-			
-			index = (index+length+skipSize) % LIST_SIZE;
-			skipSize++;
+			reverseListSection(Integer.parseInt(lengthStr));
 		}
-		
 		return list[0] * list[1];
 	}
 	
 	public String hash2(String input) {
-		int skipSize = 0;
-		int index = 0;
-
-		List<Character> chars = new LinkedList<Character>();
+		List<Integer> lengths = new LinkedList<Integer>();
 		for (char c : input.toCharArray()) {
-			chars.add(c);
+			lengths.add((int) c);
 		}
-		chars.add((char) 17);
-		chars.add((char) 31);
-		chars.add((char) 73);
-		chars.add((char) 47);
-		chars.add((char) 23);
+		for (int i : new int[]{17, 31, 73, 47, 23}) {
+			lengths.add(i);
+		}
 		
 		for (int i = 0; i < 64; i++) {
-			for (Character c : chars) {
-				int length = c;
-
-				// Do the reversing
-				int frontIndex = index;
-				int backIndex = index+length-1;
-				while (frontIndex < backIndex) {
-					// Change values
-					int valueAtFrontIndex = list[frontIndex%LIST_SIZE];
-					list[frontIndex%LIST_SIZE] = list[backIndex%LIST_SIZE];
-					list[backIndex%LIST_SIZE] = valueAtFrontIndex;
-
-					frontIndex++;
-					backIndex--;
-				}
-
-				index = (index+length+skipSize) % LIST_SIZE;
-				skipSize++;
+			for (Integer length : lengths) {
+				reverseListSection(length);
 			}
 		}
 		
 		// Convert sparse hash (256 numbers) into dense hash (16 numbers),
 		// by taking the XOR of each block of 16 numbers in the sparse hash.
 		int[] denseHash = new int[16];
-		for (int i = 0; i < 16; i++) {
-			int xor = 0;
-			for (int k = i*16; k < (i+1)*16; k++) {
-				xor ^= list[k];
-			}
-			denseHash[i] = xor;
+		for (int i = 0; i < LIST_SIZE; i++) {
+			denseHash[i/16] ^= list[i];
 		}
 
 		// Output dense hash as a hex string (each number padded to 2 characters)
 		String hash = "";
 		for (int i : denseHash) {
-			String intAsHex = Integer.toHexString(i);
-			if (intAsHex.length() < 2) {
-				intAsHex = "0" + intAsHex;
-			}
-			hash += intAsHex;
+			hash += String.format("%02x", i);
 		}
 		return hash;
+	}
+	
+	private void reverseListSection(int length) {
+		int frontIndex = currentIndex;
+		int backIndex = currentIndex+length-1;
+		while (frontIndex < backIndex) {
+			int valueAtFrontIndex = list[frontIndex%LIST_SIZE];
+			list[frontIndex%LIST_SIZE] = list[backIndex%LIST_SIZE];
+			list[backIndex%LIST_SIZE] = valueAtFrontIndex;
+			frontIndex++;
+			backIndex--;
+		}
+		currentIndex = (currentIndex + length + skipSize++) % LIST_SIZE;
 	}
 }

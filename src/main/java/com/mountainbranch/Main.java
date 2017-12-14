@@ -112,7 +112,7 @@ public class Main {
 	public void dec10() {
 		String[] input = resourceToStringArray("/input10");
 		Dec10 dec10 = new Dec10();
-		System.out.println("Dec 10 (1): " + dec10.hash(input[0]));
+		System.out.println("Dec 10 (1): " + dec10.hash1(input[0]));
 		dec10 = new Dec10();
 		System.out.println("Dec 10 (2): " + dec10.hash2(input[0]));
 	}
