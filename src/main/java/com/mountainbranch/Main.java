@@ -121,6 +121,8 @@ public class Main {
 	public void dec11() {
 		String[] input = resourceToStringArray("/input11");
 		Dec11 dec11 = new Dec11();
-		System.out.println("Dec 11 (1): " + dec11.calcDistance(input[0]));
+		dec11.doMoves(input[0]);
+		System.out.println("Dec 11 (1): " + dec11.getDistanceFromOrigin());
+		System.out.println("Dec 11 (2): " + dec11.getMaxDistanceFromOrigin());
 	}
 }
