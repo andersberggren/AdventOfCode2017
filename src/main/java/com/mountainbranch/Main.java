@@ -19,7 +19,8 @@ public class Main {
 		//main.dec7();
 		//main.dec8();
 		//main.dec9();
-		main.dec10();
+		//main.dec10();
+		main.dec11();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -115,5 +116,11 @@ public class Main {
 		System.out.println("Dec 10 (1): " + dec10.hash1(input[0]));
 		dec10 = new Dec10();
 		System.out.println("Dec 10 (2): " + dec10.hash2(input[0]));
+	}
+	
+	public void dec11() {
+		String[] input = resourceToStringArray("/input11");
+		Dec11 dec11 = new Dec11();
+		System.out.println("Dec 11 (1): " + dec11.calcDistance(input[0]));
 	}
 }
