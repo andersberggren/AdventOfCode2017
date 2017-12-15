@@ -132,5 +132,6 @@ public class Main {
 		Dec12 dec12 = new Dec12();
 		dec12.readConnections(input);
 		System.out.println("Dec 12 (1): " + dec12.getNumberOfConnectionsInGroup(0));
+		System.out.println("Dec 12 (2): " + dec12.getNumberOfGroups());
 	}
 }
