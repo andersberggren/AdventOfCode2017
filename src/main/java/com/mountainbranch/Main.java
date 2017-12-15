@@ -19,8 +19,9 @@ public class Main {
 		//main.dec7();
 		//main.dec8();
 		//main.dec9();
-		main.dec10();
-		main.dec11();
+		//main.dec10();
+		//main.dec11();
+		main.dec12();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -124,5 +125,12 @@ public class Main {
 		dec11.doMoves(input[0]);
 		System.out.println("Dec 11 (1): " + dec11.getDistanceFromOrigin());
 		System.out.println("Dec 11 (2): " + dec11.getMaxDistanceFromOrigin());
+	}
+	
+	public void dec12() {
+		String[] input = resourceToStringArray("/input12");
+		Dec12 dec12 = new Dec12();
+		dec12.readConnections(input);
+		System.out.println("Dec 12 (1): " + dec12.getNumberOfConnectionsInGroup(0));
 	}
 }
