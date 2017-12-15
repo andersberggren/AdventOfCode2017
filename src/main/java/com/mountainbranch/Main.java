@@ -15,14 +15,14 @@ public class Main {
 		//main.dec3();
 		//main.dec4();
 		//main.dec5();
-		//main.dec6();
+		main.dec6();
 		//main.dec7();
 		//main.dec8();
 		//main.dec9();
 		//main.dec10();
 		//main.dec11();
 		//main.dec12();
-		main.dec13();
+		//main.dec13();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
