@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Dec9 {
 	private enum State {GROUP, GARBAGE};
-	private Group topGroup = null;
+	private Group topGroup = new Group(null);
 	private int totalGarbage = 0;
 	
 	public Dec9(String input) {
@@ -14,45 +14,39 @@ public class Dec9 {
 	
 	private void parseGroups(String input) {
 		char[] chars = input.toCharArray();
-		topGroup = new Group(null);
 		Group currentGroup = topGroup;
 		State state = State.GROUP;
 		
 		for (int i = 1; i < chars.length; i++) {
-			switch (chars[i]) {
-			case '{':
-				if (state == State.GROUP) {
+			if (state == State.GROUP) {
+				switch (chars[i]) {
+				case '{':
 					// Beginning of new group
 					Group newGroup = new Group(currentGroup);
 					currentGroup.children.add(newGroup);
 					currentGroup = newGroup;
-				} else {
-					totalGarbage++;
-				}
-				break;
-			case '}':
-				if (state == State.GROUP) {
+					break;
+				case '}':
 					// End of group
 					currentGroup = currentGroup.parent;
-				} else {
-					totalGarbage++;
+					break;
+				case '<':
+					// Beginning of garbage
+					state = State.GARBAGE;
+					break;
+				default:
 				}
-				break;
-			case '<':
-				if (state == State.GARBAGE) {
-					totalGarbage++;
-				}
-				state = State.GARBAGE;
-				break;
-			case '>':
-				state = State.GROUP;
-				break;
-			case '!':
-				// Skip next char
-				i++;
-				break;
-			default:
-				if (state == State.GARBAGE) {
+			} else if (state == State.GARBAGE) {
+				switch (chars[i]) {
+				case '>':
+					// End of garbage
+					state = State.GROUP;
+					break;
+				case '!':
+					// Skip next char
+					i++;
+					break;
+				default:
 					totalGarbage++;
 				}
 			}
