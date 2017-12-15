@@ -21,7 +21,8 @@ public class Main {
 		//main.dec9();
 		//main.dec10();
 		//main.dec11();
-		main.dec12();
+		//main.dec12();
+		main.dec13();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -132,5 +133,12 @@ public class Main {
 		Dec12 dec12 = new Dec12(input);
 		System.out.println("Dec 12 (1): " + dec12.getGroupContaining(0).size());
 		System.out.println("Dec 12 (2): " + dec12.getNumberOfGroups());
+	}
+	
+	public void dec13() {
+		String[] input = resourceToStringArray("/input13");
+		Dec13 dec13 = new Dec13(input);
+		System.out.println("Dec 13 (1): " + dec13.getTotalSeverity());
+		System.out.println("Dec 13 (2): " + dec13.getDelayToPassWithoutBeingCaught());
 	}
 }
