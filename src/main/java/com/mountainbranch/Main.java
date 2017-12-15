@@ -129,9 +129,8 @@ public class Main {
 	
 	public void dec12() {
 		String[] input = resourceToStringArray("/input12");
-		Dec12 dec12 = new Dec12();
-		dec12.readConnections(input);
-		System.out.println("Dec 12 (1): " + dec12.getNumberOfConnectionsInGroup(0));
+		Dec12 dec12 = new Dec12(input);
+		System.out.println("Dec 12 (1): " + dec12.getGroupContaining(0).size());
 		System.out.println("Dec 12 (2): " + dec12.getNumberOfGroups());
 	}
 }
