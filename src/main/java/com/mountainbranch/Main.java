@@ -10,21 +10,21 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
-		//main.dec1();
-		//main.dec2();
-		//main.dec3();
-		//main.dec4();
-		//main.dec5();
-		//main.dec6();
-		//main.dec7();
-		//main.dec8();
-		//main.dec9();
-		//main.dec10();
-		//main.dec11();
-		//main.dec12();
-		//main.dec13();
-		//main.dec14();
-		//main.dec15();
+		main.dec1();
+		main.dec2();
+		main.dec3();
+		main.dec4();
+		main.dec5();
+		main.dec6();
+		main.dec7();
+		main.dec8();
+		main.dec9();
+		main.dec10();
+		main.dec11();
+		main.dec12();
+		main.dec13();
+		main.dec14();
+		main.dec15();
 		main.dec16();
 	}
 	
@@ -75,7 +75,7 @@ public class Main {
 		String[] input = resourceToStringArray("/input4");
 		Dec4 dec4 = new Dec4();
 		System.out.println("Dec 4 (1): " + dec4.countValidPasswords1(input));
-		System.out.println("Dec 4 (1): " + dec4.countValidPasswords2(input));
+		System.out.println("Dec 4 (2): " + dec4.countValidPasswords2(input));
 	}
 	
 	public void dec5() {
@@ -89,7 +89,7 @@ public class Main {
 		String[] input = resourceToStringArray("/input6");
 		Dec6 dec6 = new Dec6();
 		System.out.println("Dec 6 (1): " + dec6.memoryReallocation1(input[0]));
-		System.out.println("Dec 6 (1): " + dec6.memoryReallocation2(input[0]));
+		System.out.println("Dec 6 (2): " + dec6.memoryReallocation2(input[0]));
 	}
 	
 	public void dec7() {
@@ -155,7 +155,7 @@ public class Main {
 	public void dec15() {
 		Dec15 dec15 = new Dec15();
 		System.out.println("Dec 15 (1): " + dec15.getNumberOfMatches(40000000L));
-		System.out.println("Dec 15 (1): " + dec15.getNumberOfMatchesStrict(5000000L));
+		System.out.println("Dec 15 (2): " + dec15.getNumberOfMatchesStrict(5000000L));
 	}
 	
 	public void dec16() {

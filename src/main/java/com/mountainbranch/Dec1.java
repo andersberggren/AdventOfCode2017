@@ -25,17 +25,12 @@ public class Dec1 {
 	}
 
 	private int calculateSum(String input, OtherIndexGetter oig) {
-		String[] digits = input.split("");
 		int sum = 0;
-		
-		for (int i = 0; i < digits.length; i++) {
-			int digit1 = Integer.parseInt(digits[i]);
-			int digit2 = Integer.parseInt(digits[oig.getNextIndex(i, digits.length)]);
-			if (digit1 == digit2) {
-				sum += digit1;
+		for (int i = 0; i < input.length(); i++) {
+			if (input.charAt(i) == input.charAt(oig.getNextIndex(i, input.length()))) {
+				sum += Integer.parseInt(input.substring(i, i+1));
 			}
 		}
-		
 		return sum;
 	}
 
