@@ -23,7 +23,8 @@ public class Main {
 		//main.dec11();
 		//main.dec12();
 		//main.dec13();
-		main.dec14();
+		//main.dec14();
+		main.dec15();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -148,5 +149,10 @@ public class Main {
 		Dec14 dec14 = new Dec14();
 		System.out.println("Dec 14 (1): " + dec14.getNumberOfUsedSquares(input));
 		System.out.println("Dec 14 (2): " + dec14.getNumberOfRegions(input));
+	}
+	
+	public void dec15() {
+		Dec15 dec15 = new Dec15(591, 393);
+		System.out.println("Dec 15 (1): " + dec15.getNumberOfMatches(40000000L));
 	}
 }
