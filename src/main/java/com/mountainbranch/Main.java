@@ -16,13 +16,14 @@ public class Main {
 		//main.dec4();
 		//main.dec5();
 		//main.dec6();
-		main.dec7();
+		//main.dec7();
 		//main.dec8();
 		//main.dec9();
 		//main.dec10();
 		//main.dec11();
 		//main.dec12();
 		//main.dec13();
+		main.dec14();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -140,5 +141,11 @@ public class Main {
 		Dec13 dec13 = new Dec13(input);
 		System.out.println("Dec 13 (1): " + dec13.getTotalSeverity());
 		System.out.println("Dec 13 (2): " + dec13.getDelayToPassWithoutBeingCaught());
+	}
+	
+	public void dec14() {
+		String input = "nbysizxe";
+		Dec14 dec14 = new Dec14();
+		System.out.println("Dec 14 (1): " + dec14.getNumberOfUsedSquares(input));
 	}
 }
