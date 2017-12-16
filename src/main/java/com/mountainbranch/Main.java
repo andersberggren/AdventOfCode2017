@@ -152,7 +152,8 @@ public class Main {
 	}
 	
 	public void dec15() {
-		Dec15 dec15 = new Dec15(591, 393);
+		Dec15 dec15 = new Dec15();
 		System.out.println("Dec 15 (1): " + dec15.getNumberOfMatches(40000000L));
+		System.out.println("Dec 15 (1): " + dec15.getNumberOfMatchesStrict(5000000L));
 	}
 }
