@@ -13,12 +13,12 @@ public class Dec7 {
 	public Dec7(String[] input) {
 		// Build tower
 		for (String line : input) {
-			String[] words = line.split("[\t ]+");
+			String[] words = line.split("[\t \\(\\),]+");
 			String name = words[0];
-			int ownWeight = Integer.parseInt(words[1].replace("(", "").replace(")", ""));
+			int ownWeight = Integer.parseInt(words[1]);
 			Disc disc = new Disc(name, ownWeight);
 			for (int i = 3; i < words.length; i++) {
-				String supportedDisc = words[i].replace(",", "");
+				String supportedDisc = words[i];
 				disc.supportedDiscs.add(supportedDisc);
 			}
 			tower.put(name, disc);
@@ -26,36 +26,33 @@ public class Dec7 {
 	}
 	
 	public String findBottomProgram() {
-		Set<String> allSupportedDiscs = new HashSet<String>();
-		
+		Set<String> discs = new HashSet<String>(tower.keySet());
 		for (Disc disc : tower.values()) {
-			allSupportedDiscs.addAll(disc.supportedDiscs);
+			discs.removeAll(disc.supportedDiscs);
 		}
-		
-		for (String disc : tower.keySet()) {
-			if (!allSupportedDiscs.contains(disc)) {
-				return disc;
-			}
-		}
-		
-		throw new RuntimeException("Could not find bottom program");
+		return discs.iterator().next();
 	}
 	
+	// TODO Make this method output the answer (new weight of unbalanced disc),
+	//      rather than some output that makes it possible to find the answer.
 	public void findUnbalancedProgram() {
+		Disc topUnbalancedDisc = null;
 		for (Disc disc : tower.values()) {
 			Set<Integer> weights = new HashSet<Integer>();
 			for (String name : disc.supportedDiscs) {
 				weights.add(tower.get(name).getTotalWeight());
 			}
-			
-			if (weights.size() > 1) {
-				System.out.println("Weights of " + disc.name + " are not equal!");
-				for (String name : disc.supportedDiscs) {
-					Disc supportedDisc = tower.get(name);
-					System.out.println(supportedDisc.name + ", " + supportedDisc.ownWeight
-							+ "/" + supportedDisc.getTotalWeight());
-				}
+			if (weights.size() > 1 && (topUnbalancedDisc == null
+					|| disc.getTotalWeight() < topUnbalancedDisc.getTotalWeight())) {
+				topUnbalancedDisc = disc;
 			}
+		}
+		
+		System.out.println("Top unbalanced disc: " + topUnbalancedDisc.name);
+		for (String name : topUnbalancedDisc.supportedDiscs) {
+			Disc supportedDisc = tower.get(name);
+			System.out.println(supportedDisc.name + ", " + supportedDisc.ownWeight
+					+ "/" + supportedDisc.getTotalWeight());
 		}
 	}
 	
