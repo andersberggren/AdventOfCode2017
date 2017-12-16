@@ -147,5 +147,6 @@ public class Main {
 		String input = "nbysizxe";
 		Dec14 dec14 = new Dec14();
 		System.out.println("Dec 14 (1): " + dec14.getNumberOfUsedSquares(input));
+		System.out.println("Dec 14 (2): " + dec14.getNumberOfRegions(input));
 	}
 }
