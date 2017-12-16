@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Dec3 {
-	public int calcDistance(int targetAddress) {
+	public static int calcDistance(int targetAddress) {
 		// Find the smallest (n*2+1) x (n*2+1) grid that contains the target address.
 		// The target address will be on the perimeter of that grid.
 		int sideLength = 1;
@@ -26,7 +26,7 @@ public class Dec3 {
 		}
 	}
 	
-	public int calcFirstValueLargerThan(int targetValue) {
+	public static int calcFirstValueLargerThan(int targetValue) {
 		// Initial direction: Right
 		Point direction = new Point(1, 0);
 		Point currentAddress = new Point(0, 0);
@@ -57,7 +57,7 @@ public class Dec3 {
 		}
 	}
 	
-	private int calcValueOfAddress(Point address, Map<Point, Integer> grid) {
+	private static int calcValueOfAddress(Point address, Map<Point, Integer> grid) {
 		if (address.x == 0 && address.y == 0)
 			return 1;
 		

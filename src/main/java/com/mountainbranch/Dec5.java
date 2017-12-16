@@ -1,7 +1,7 @@
 package com.mountainbranch;
 
 public class Dec5 {
-	public int mazeOfTwistyTrampolines1(String[] input) {
+	public static int mazeOfTwistyTrampolines1(String[] input) {
 		NewValueGetter nvg = new NewValueGetter() {
 			@Override
 			public int getNewValue(int oldValue) {
@@ -11,7 +11,7 @@ public class Dec5 {
 		return mazeOfTwistyTrampolines(input, nvg);
 	}
 
-	public int mazeOfTwistyTrampolines2(String[] input) {
+	public static int mazeOfTwistyTrampolines2(String[] input) {
 		NewValueGetter nvg = new NewValueGetter() {
 			@Override
 			public int getNewValue(int oldValue) {
@@ -21,7 +21,7 @@ public class Dec5 {
 		return mazeOfTwistyTrampolines(input, nvg);
 	}
 
-	private int mazeOfTwistyTrampolines(String[] input, NewValueGetter newValueGetter) {
+	private static int mazeOfTwistyTrampolines(String[] input, NewValueGetter newValueGetter) {
 		int currentAddress = 0;
 		int steps = 0;
 		Integer[] instructions = new Integer[input.length];
@@ -43,6 +43,7 @@ public class Dec5 {
 				return steps;
 		}
 	}
+	
 	private static interface NewValueGetter {
 		public int getNewValue(int oldValue);
 	}

@@ -1,7 +1,7 @@
 package com.mountainbranch;
 
 public class Dec1 {
-	public int calculateSum1(String input) {
+	public static int calculateSum1(String input) {
 		OtherIndexGetter oig = new OtherIndexGetter() {
 			@Override
 			public int getNextIndex(int currentIndex, int listSize) {
@@ -11,7 +11,7 @@ public class Dec1 {
 		return calculateSum(input, oig);
 	}
 
-	public int calculateSum2(String input) {
+	public static int calculateSum2(String input) {
 		OtherIndexGetter oig = new OtherIndexGetter() {
 			@Override
 			public int getNextIndex(int currentIndex, int listSize) {
@@ -24,7 +24,7 @@ public class Dec1 {
 		return calculateSum(input, oig);
 	}
 
-	private int calculateSum(String input, OtherIndexGetter oig) {
+	private static int calculateSum(String input, OtherIndexGetter oig) {
 		int sum = 0;
 		for (int i = 0; i < input.length(); i++) {
 			if (input.charAt(i) == input.charAt(oig.getNextIndex(i, input.length()))) {

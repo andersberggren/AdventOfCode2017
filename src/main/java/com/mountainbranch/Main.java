@@ -52,44 +52,38 @@ public class Main {
 	
 	public void dec1() {
 		String[] input = resourceToStringArray("/input1");
-		Dec1 dec1 = new Dec1();
-		System.out.println("Dec 1 (1): " + dec1.calculateSum1(input[0]));
-		System.out.println("Dec 1 (2): " + dec1.calculateSum2(input[0]));
+		System.out.println("Dec 1 (1): " + Dec1.calculateSum1(input[0]));
+		System.out.println("Dec 1 (2): " + Dec1.calculateSum2(input[0]));
 	}
 	
 	public void dec2() {
 		String[] input = resourceToStringArray("/input2");
-		Dec2 dec2 = new Dec2();
-		System.out.println("Dec 2 (1): " + dec2.calcChecksum1(input));
-		System.out.println("Dec 2 (2): " + dec2.calcChecksum2(input));
+		System.out.println("Dec 2 (1): " + Dec2.calcChecksum1(input));
+		System.out.println("Dec 2 (2): " + Dec2.calcChecksum2(input));
 	}
 	
 	public void dec3() {
 		int inputAddress = 265149;
-		Dec3 dec3 = new Dec3();
-		System.out.println("Dec 3 (1): " + dec3.calcDistance(inputAddress));
-		System.out.println("Dec 3 (2): " + dec3.calcFirstValueLargerThan(inputAddress));
+		System.out.println("Dec 3 (1): " + Dec3.calcDistance(inputAddress));
+		System.out.println("Dec 3 (2): " + Dec3.calcFirstValueLargerThan(inputAddress));
 	}
 	
 	public void dec4() {
 		String[] input = resourceToStringArray("/input4");
-		Dec4 dec4 = new Dec4();
-		System.out.println("Dec 4 (1): " + dec4.countValidPassphrases1(input));
-		System.out.println("Dec 4 (2): " + dec4.countValidPassphrases2(input));
+		System.out.println("Dec 4 (1): " + Dec4.countValidPassphrases1(input));
+		System.out.println("Dec 4 (2): " + Dec4.countValidPassphrases2(input));
 	}
 	
 	public void dec5() {
 		String[] input = resourceToStringArray("/input5");
-		Dec5 dec5 = new Dec5();
-		System.out.println("Dec 5 (1): " + dec5.mazeOfTwistyTrampolines1(input));
-		System.out.println("Dec 5 (2): " + dec5.mazeOfTwistyTrampolines2(input));
+		System.out.println("Dec 5 (1): " + Dec5.mazeOfTwistyTrampolines1(input));
+		System.out.println("Dec 5 (2): " + Dec5.mazeOfTwistyTrampolines2(input));
 	}
 	
 	public void dec6() {
 		String[] input = resourceToStringArray("/input6");
-		Dec6 dec6 = new Dec6();
-		System.out.println("Dec 6 (1): " + dec6.memoryReallocation1(input[0]));
-		System.out.println("Dec 6 (2): " + dec6.memoryReallocation2(input[0]));
+		System.out.println("Dec 6 (1): " + Dec6.memoryReallocation1(input[0]));
+		System.out.println("Dec 6 (2): " + Dec6.memoryReallocation2(input[0]));
 	}
 	
 	public void dec7() {

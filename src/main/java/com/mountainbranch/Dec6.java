@@ -4,18 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Dec6 {
-	public int memoryReallocation1(String input) {
+	public static int memoryReallocation1(String input) {
 		return getConfigurationsUntilRepeat(input).size()-1;
 	}
 	
-	public int memoryReallocation2(String input) {
+	public static int memoryReallocation2(String input) {
 		List<String> configurations = getConfigurationsUntilRepeat(input);
 		int lastIndex = configurations.size()-1;
 		String lastConfiguration = configurations.get(lastIndex);
 		return lastIndex - configurations.indexOf(lastConfiguration);
 	}
 	
-	private List<String> getConfigurationsUntilRepeat(String input) {
+	private static List<String> getConfigurationsUntilRepeat(String input) {
 		String[] inputArray = input.split("[\t ]+");
 		int[] memoryBanks = new int[inputArray.length];
 		for (int i = 0; i < memoryBanks.length; i++) {
@@ -59,7 +59,7 @@ public class Dec6 {
 		}
 	}
 
-	private String memoryBanksAsString(int[] memoryBanks) {
+	private static String memoryBanksAsString(int[] memoryBanks) {
 		StringBuilder sb = new StringBuilder();
 		for (int memoryBank : memoryBanks) {
 			sb.append(memoryBank).append(";");

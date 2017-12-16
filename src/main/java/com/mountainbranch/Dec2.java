@@ -3,7 +3,7 @@ package com.mountainbranch;
 import java.util.Arrays;
 
 public class Dec2 {
-	public int calcChecksum1(String[] input) {
+	public static int calcChecksum1(String[] input) {
 		// The checksum of a line is the difference between the largest and smallest number
 		LineChecksumCalculator lcc = new LineChecksumCalculator() {
 			@Override
@@ -15,7 +15,7 @@ public class Dec2 {
 		return calcChecksum(input, lcc);
 	}
 
-	public int calcChecksum2(String[] input) {
+	public static int calcChecksum2(String[] input) {
 		// The checksum of a line is the quotient of the only two evenly divisible numbers
 		LineChecksumCalculator lcc = new LineChecksumCalculator() {
 			@Override
@@ -34,7 +34,7 @@ public class Dec2 {
 		return calcChecksum(input, lcc);
 	}
 
-	private int calcChecksum(String[] input, LineChecksumCalculator lcc) {
+	private static int calcChecksum(String[] input, LineChecksumCalculator lcc) {
 		int checksum = 0;
 		for (String line : input) {
 			String[] words = line.split("[\t ]+");
