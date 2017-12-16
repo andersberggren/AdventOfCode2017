@@ -24,7 +24,8 @@ public class Main {
 		//main.dec12();
 		//main.dec13();
 		//main.dec14();
-		main.dec15();
+		//main.dec15();
+		main.dec16();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -155,5 +156,13 @@ public class Main {
 		Dec15 dec15 = new Dec15();
 		System.out.println("Dec 15 (1): " + dec15.getNumberOfMatches(40000000L));
 		System.out.println("Dec 15 (1): " + dec15.getNumberOfMatchesStrict(5000000L));
+	}
+	
+	public void dec16() {
+		String[] input = resourceToStringArray("/input16");
+		Dec16 dec16 = new Dec16();
+		System.out.println("Dec 16 (1): " + dec16.dance(input[0]));
+		dec16 = new Dec16();
+		System.out.println("Dec 16 (2): " + dec16.billionDances(input[0]));
 	}
 }
