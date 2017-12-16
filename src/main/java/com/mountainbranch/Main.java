@@ -74,8 +74,8 @@ public class Main {
 	public void dec4() {
 		String[] input = resourceToStringArray("/input4");
 		Dec4 dec4 = new Dec4();
-		System.out.println("Dec 4 (1): " + dec4.countValidPasswords1(input));
-		System.out.println("Dec 4 (2): " + dec4.countValidPasswords2(input));
+		System.out.println("Dec 4 (1): " + dec4.countValidPassphrases1(input));
+		System.out.println("Dec 4 (2): " + dec4.countValidPassphrases2(input));
 	}
 	
 	public void dec5() {

@@ -5,41 +5,36 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Dec4 {
-	public int countValidPasswords1(String[] passwords) {
-		int count = 0;
-		for (String password : passwords)
-			if (isValid1(password))
-				count++;
-		return count;
+	public int countValidPassphrases1(String[] passphrases) {
+		return countValidPassphrases(passphrases, false);
 	}
 
-	private boolean isValid1(String password) {
-		String[] words = password.split("[\t ]+");
-		Set<String> wordSet = new HashSet<String>();
-		for (String word : words)
-			wordSet.add(word);
-		return words.length == wordSet.size();
+	public int countValidPassphrases2(String[] passphrases) {
+		return countValidPassphrases(passphrases, true);
+	}
+
+	private int countValidPassphrases(String[] passphrases, boolean detectAnagrams) {
+		int count = 0;
+		for (String passphrase : passphrases) {
+			if (isValid(passphrase, detectAnagrams)) {
+				count++;
+			}
+		}
+		return count;
 	}
 	
-	public int countValidPasswords2(String[] passwords) {
-		int count = 0;
-		for (String password : passwords)
-			if (isValid2(password))
-				count++;
-		return count;
-	}
-
-	private boolean isValid2(String password) {
-		String[] words = password.split("[\t ]+");
+	private boolean isValid(String passphrase, boolean detectAnagrams) {
 		Set<String> wordSet = new HashSet<String>();
-		for (String word : words) {
-			String[] chars = word.split("");
-			Arrays.sort(chars);
-			String newWord = "";
-			for (String s : chars)
-				newWord += s;
-			wordSet.add(newWord);
+		for (String word : passphrase.split("[\t ]+")) {
+			if (detectAnagrams) {
+				char[] chars = word.toCharArray();
+				Arrays.sort(chars);
+				word = String.valueOf(chars);
+			}
+			if (!wordSet.add(word)) {
+				return false;
+			}
 		}
-		return words.length == wordSet.size();
+		return true;
 	}
 }
