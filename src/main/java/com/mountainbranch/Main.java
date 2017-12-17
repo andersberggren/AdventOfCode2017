@@ -16,16 +16,17 @@ public class Main {
 		main.dec4();
 		main.dec5();
 		main.dec6();
-		main.dec7();
+		//main.dec7();
 		main.dec8();
 		main.dec9();
 		main.dec10();
 		main.dec11();
 		main.dec12();
-		main.dec13();
+		//main.dec13();
 		main.dec14();
-		main.dec15();
+		//main.dec15();
 		main.dec16();
+		main.dec17();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -158,5 +159,10 @@ public class Main {
 		System.out.println("Dec 16 (1): " + dec16.dance(input[0]));
 		dec16 = new Dec16();
 		System.out.println("Dec 16 (2): " + dec16.billionDances(input[0]));
+	}
+	
+	public void dec17() {
+		Dec17 dec17 = new Dec17(344, 2017);
+		System.out.println("Dec 17 (1): " + dec17.getValueAfterLastInsertion());
 	}
 }
