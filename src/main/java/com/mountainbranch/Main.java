@@ -164,5 +164,7 @@ public class Main {
 	public void dec17() {
 		Dec17 dec17 = new Dec17(344, 2017);
 		System.out.println("Dec 17 (1): " + dec17.getValueAfterLastInsertion());
+		dec17 = new Dec17(344, 50000000);
+		System.out.println("Dec 17 (1): " + dec17.getValueAfter(0));
 	}
 }
