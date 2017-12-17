@@ -6,46 +6,51 @@ import java.util.List;
 public class Dec17 {
 	private final int stepSize;
 	private final int numberOfIterations;
-	
-	private List<Integer> buffer;
-	private int currentPosition = 0;
+	private final List<Integer> buffer = new ArrayList<Integer>();
 	
 	public Dec17(int stepSize, int numberOfIterations) {
 		this.stepSize = stepSize;
 		this.numberOfIterations = numberOfIterations;
-		buffer = new ArrayList<Integer>();
-		buffer.add((Integer) 0);
-		populateBuffer();
 	}
 	
 	public int getValueAfterLastInsertion() {
-		int position = (currentPosition+1) % buffer.size();
-		return buffer.get(position);
+		if (buffer.size() == 0) {
+			populateBuffer();
+		}
+		Integer lastInsertedValue = buffer.size() - 1;
+		int index = getNewPositionInBuffer(buffer.indexOf(lastInsertedValue), 1, buffer.size());
+		return buffer.get(index);
 	}
 
-	public int getValueAfter(Integer value) {
-		int position = (buffer.indexOf(value)+1) % buffer.size();
-		return buffer.get(position);
+	/**
+	 * Returns the value after 0, when the buffer has been populated
+	 * (for performance reasons, the buffer is not actually populated).
+	 */
+	public int getValueAfter0() {
+		final int indexOf0 = 0;
+		int cursorPosition = 0;
+		int valueAfter0 = 0;
+		int bufferSize = 1;
+		for (int i = 1; i < numberOfIterations; i++) {
+			cursorPosition = getNewPositionInBuffer(cursorPosition, stepSize, bufferSize) + 1;
+			if (cursorPosition == indexOf0 + 1) {
+				valueAfter0 = i;
+			}
+			bufferSize++;
+		}
+		return valueAfter0;
 	}
 
 	private void populateBuffer() {
+		buffer.add((Integer) 0);
+		int cursorPosition = 0;
 		for (int i = 1; i <= numberOfIterations; i++) {
-			// Move to new position
-			currentPosition = (currentPosition+stepSize) % buffer.size();
-			
-			// TODO Debug trace
-			if (buffer.get(currentPosition) == 0) {
-				System.out.println("New value after 0: " + i);
-			}
-			
-			// Insert value after current position.
-			// The position of the new value is now the current position.
-			buffer.add(currentPosition+1, (Integer) i);
-			currentPosition++;
-			
-			// TODO Debug trace
-			if (i % 100000 == 0)
-				System.out.println("Number of iterations: " + i);
+			cursorPosition = getNewPositionInBuffer(cursorPosition, stepSize, buffer.size()) + 1;
+			buffer.add(cursorPosition, (Integer) i);
 		}
+	}
+	
+	private int getNewPositionInBuffer(int oldPosition, int delta, int bufferSize) {
+		return (oldPosition+delta) % bufferSize;
 	}
 }
