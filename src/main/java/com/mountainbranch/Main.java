@@ -171,7 +171,6 @@ public class Main {
 	
 	public void dec18() {
 		String[] input = resourceToStringArray("/input18");
-		Dec18 dec18 = new Dec18();
-		System.out.println("Dec 18 (1): " + dec18.executeInstructions(input));
+		System.out.println("Dec 18 (2): " + Dec18.executeInstructionsUntilDeadlock(input));
 	}
 }
