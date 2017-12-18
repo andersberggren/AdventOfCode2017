@@ -30,9 +30,7 @@ public abstract class Program {
 			} else if (type.equals("mod")) {
 				setRegisterValue(register, currentValue % getRegisterValue(words[2]));
 			} else if (type.equals("rcv")) {
-				try {
-					handleRcv(register);
-				} catch (HaltException e) {
+				if (!handleRcv(register)) {
 					return instructionsExecuted;
 				}
 			} else if (type.equals("jgz")) {
@@ -46,7 +44,8 @@ public abstract class Program {
 	
 	protected abstract void handleSnd(String register);
 	
-	protected abstract void handleRcv(String register) throws HaltException;
+	/** Returns true on success, false if program should halt. */
+	protected abstract boolean handleRcv(String register);
 
 	protected final long getRegisterValue(String registerOrValue) {
 		if (registerOrValue.matches("[A-Za-z]+")) {

@@ -20,12 +20,13 @@ public class CorrectProgram extends Program {
 	}
 	
 	@Override
-	protected void handleRcv(String register) throws HaltException {
+	protected boolean handleRcv(String register) {
 		Long value = messageQueue.receive(programId);
 		if (value == null) {
-			throw new HaltException();
+			return false;
 		} else {
 			setRegisterValue(register, value);
+			return true;
 		}
 	}
 	

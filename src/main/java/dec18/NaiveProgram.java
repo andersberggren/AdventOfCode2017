@@ -9,10 +9,8 @@ public class NaiveProgram extends Program {
 	}
 
 	@Override
-	protected void handleRcv(String register) throws HaltException {
-		if (getRegisterValue(register) != 0) {
-			throw new HaltException();
-		}
+	protected boolean handleRcv(String register) {
+		return getRegisterValue(register) == 0;
 	}
 	
 	public long getFrequency() {
