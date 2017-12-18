@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
+import dec18.Dec18;
+
 public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -171,6 +173,7 @@ public class Main {
 	
 	public void dec18() {
 		String[] input = resourceToStringArray("/input18");
-		System.out.println("Dec 18 (2): " + Dec18.executeInstructionsUntilDeadlock(input));
+		System.out.println("Dec 18 (1): " + Dec18.runNaiveProgram(input));
+		System.out.println("Dec 18 (2): " + Dec18.runCorrectPrograms(input));
 	}
 }
