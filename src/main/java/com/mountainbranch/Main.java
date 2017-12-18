@@ -27,6 +27,7 @@ public class Main {
 		//main.dec15();
 		main.dec16();
 		main.dec17();
+		main.dec18();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -166,5 +167,11 @@ public class Main {
 		System.out.println("Dec 17 (1): " + dec17.getValueAfterLastInsertion());
 		dec17 = new Dec17(344, 50000000);
 		System.out.println("Dec 17 (2): " + dec17.getValueAfter0());
+	}
+	
+	public void dec18() {
+		String[] input = resourceToStringArray("/input18");
+		Dec18 dec18 = new Dec18();
+		System.out.println("Dec 18 (1): " + dec18.executeInstructions(input));
 	}
 }
