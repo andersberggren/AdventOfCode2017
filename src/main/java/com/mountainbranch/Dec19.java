@@ -11,6 +11,7 @@ public class Dec19 {
 		width = input[0].length();
 		height = input.length;
 		grid = new char[width][height];
+		// y increases downwards, so first row is 0
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				grid[x][y] = input[y].charAt(x);
@@ -40,9 +41,31 @@ public class Dec19 {
 		return letters;
 	}
 
+	public int getNumberOfSteps() {
+		Point cursor = null;
+		Point direction = new Point(0, 1);
+		
+		// Find starting point
+		for (int x = 0; x < width; x++) {
+			if (grid[x][0] == '|') {
+				cursor = new Point(x, 0);
+				break;
+			}
+		}
+		int numberOfSteps = 1;
+		
+		while (step(cursor, direction)) {
+			numberOfSteps++;
+			char c = grid[cursor.x][cursor.y];
+			if (c >= 'A' && c <= 'Z') {
+			}
+		}
+		return numberOfSteps;
+	}
+
 	private boolean step(Point cursor, Point direction) {
 		Point[] directions = new Point[]{
-				// "Forward" (relative to the direction we're currently facing)
+				// Forward (the direction we're currently facing)
 				direction,
 				// Right
 				new Point(-direction.y, direction.x),

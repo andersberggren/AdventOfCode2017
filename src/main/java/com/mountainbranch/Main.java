@@ -182,5 +182,6 @@ public class Main {
 		String[] input = resourceToStringArray("/input19");
 		Dec19 dec19 = new Dec19(input);
 		System.out.println("Dec 19 (1): " + dec19.findLetters());
+		System.out.println("Dec 19 (2): " + dec19.getNumberOfSteps());
 	}
 }
