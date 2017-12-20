@@ -30,6 +30,7 @@ public class Main {
 		main.dec16();
 		main.dec17();
 		main.dec18();
+		main.dec19();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -175,5 +176,11 @@ public class Main {
 		String[] input = resourceToStringArray("/input18");
 		System.out.println("Dec 18 (1): " + Dec18.runNaiveProgram(input));
 		System.out.println("Dec 18 (2): " + Dec18.runCorrectPrograms(input));
+	}
+	
+	public void dec19() {
+		String[] input = resourceToStringArray("/input19");
+		Dec19 dec19 = new Dec19(input);
+		System.out.println("Dec 19 (1): " + dec19.findLetters());
 	}
 }
