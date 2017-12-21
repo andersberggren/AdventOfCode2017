@@ -189,6 +189,6 @@ public class Main {
 	
 	public void dec20() {
 		String[] input = resourceToStringArray("/input20");
-		System.out.println("Dec 20 (1): " + Dec20.findLongTermClosestParticle(input));
+		Dec20.findLongTermClosestParticle(input);
 	}
 }

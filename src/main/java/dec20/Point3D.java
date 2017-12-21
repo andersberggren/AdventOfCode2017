@@ -40,4 +40,27 @@ public class Point3D {
 			return false;
 		}
 	}
+	
+	@Override
+	public int hashCode() {
+		int hashCode = 0;
+		for (int i = 0; i < DIMENSIONS; i++) {
+			hashCode *= 1000;
+			hashCode += coords[i];
+		}
+		return hashCode;
+	}
+	
+	@Override
+	public String toString() {
+		String s = this.getClass().getName() + "<";
+		for (int i = 0; i < DIMENSIONS; i++) {
+			if (i != 0) {
+				s += ",";
+			}
+			s += coords[i];
+		}
+		s += ">";
+		return s;
+	}
 }

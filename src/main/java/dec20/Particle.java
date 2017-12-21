@@ -1,7 +1,7 @@
 package dec20;
 
 public class Particle implements Comparable<Particle> {
-	private final Point3D position;
+	public final Point3D position;
 	private final Point3D velocity;
 	private final Point3D acceleration;
 	
