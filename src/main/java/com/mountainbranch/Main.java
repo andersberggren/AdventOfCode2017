@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import dec18.Dec18;
+import dec20.Dec20;
 
 public class Main {
 	public static void main(String[] args) {
@@ -31,6 +32,7 @@ public class Main {
 		main.dec17();
 		main.dec18();
 		main.dec19();
+		main.dec20();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -183,5 +185,10 @@ public class Main {
 		Dec19 dec19 = new Dec19(input);
 		System.out.println("Dec 19 (1): " + dec19.getLetters());
 		System.out.println("Dec 19 (2): " + dec19.getNumberOfSteps());
+	}
+	
+	public void dec20() {
+		String[] input = resourceToStringArray("/input20");
+		System.out.println("Dec 20 (1): " + Dec20.findLongTermClosestParticle(input));
 	}
 }
