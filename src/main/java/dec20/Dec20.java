@@ -11,6 +11,8 @@ import java.util.Set;
 public class Dec20 {
 	public static void findLongTermClosestParticle(String[] input) {
 		Map<Particle, Integer> particleIndices = new HashMap<Particle, Integer>();
+		Set<Particle> collidedParticles = new HashSet<Particle>();
+		
 		// Create particles
 		List<Particle> particles = new LinkedList<Particle>();
 		for (int i = 0; i < input.length; i++) {
@@ -34,7 +36,6 @@ public class Dec20 {
 			Set<Point3D> collisionPositions = new HashSet<Point3D>();
 			for (Particle particle : particles) {
 				if (!allPositions.add(particle.position)) {
-					System.out.println("Collision at " + particle.position);
 					collisionPositions.add(particle.position);
 				}
 			}
@@ -42,7 +43,7 @@ public class Dec20 {
 			// Remove colliding particles
 			for (Particle particle : new LinkedList<Particle>(particles)) {
 				if (collisionPositions.contains(particle.position)) {
-					particles.remove(particle);
+					collidedParticles.add(particle);
 				}
 			}
 			
@@ -60,7 +61,7 @@ public class Dec20 {
 		
 		// TODO We can't be sure that all collisions have occurred at this point.
 		//      The exit condition for the while loop needs to be changed.
-		int particlesLeft = particles.size();
+		int particlesLeft = particles.size() - collidedParticles.size();
 		System.out.println("Dec 20 (2): " + particlesLeft);
 	}
 }
