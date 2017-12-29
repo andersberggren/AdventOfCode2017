@@ -33,6 +33,7 @@ public class Main {
 		main.dec18();
 		main.dec19();
 		main.dec20();
+		main.dec22();
 	}
 	
 	private String[] resourceToStringArray(String resource) {
@@ -190,5 +191,11 @@ public class Main {
 	public void dec20() {
 		String[] input = resourceToStringArray("/input20");
 		Dec20.findLongTermClosestParticle(input);
+	}
+	
+	public void dec22() {
+		String[] input = resourceToStringArray("/input22");
+		Dec22 dec22 = new Dec22(input);
+		System.out.println("Dec 22 (1): " + dec22.unleashVirus(10000));
 	}
 }
