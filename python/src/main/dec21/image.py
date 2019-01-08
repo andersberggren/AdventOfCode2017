@@ -33,7 +33,7 @@ class Image:
 		}
 		return Image(self.size, new_pixels)
 	
-	def get_enhanced_image(self, enhancement_rules, number_of_iterations):
+	def get_enhanced_image(self, enhancement_rules, number_of_iterations=1):
 		image = self
 		for i in range(number_of_iterations):  # @UnusedVariable
 			image = image._get_enhanced_image_one_iteration(enhancement_rules)

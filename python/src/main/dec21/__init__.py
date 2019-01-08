@@ -31,8 +31,10 @@ def get_enhancement_rules_from_file(filename):
 if __name__ == "__main__":
 	input_file = os.path.join(os.path.dirname(__file__), "input21.txt")
 	enhancement_rules = get_enhancement_rules_from_file(input_file)
-	image = Image.create_from_string(".#./..#/###")
+	original_image = Image.create_from_string(".#./..#/###")
+	enhanced_images = [original_image]
 	for i in [5, 18]:
-		enhanced_image = image.get_enhanced_image(enhancement_rules, i)
+		while len(enhanced_images) < i+1:
+			enhanced_images.append(enhanced_images[-1].get_enhanced_image(enhancement_rules))
 		print("Number of pixels that are on after {i} iterations: {p}".format(
-				i=i, p=len(enhanced_image.pixels)))
+				i=i, p=len(enhanced_images[i].pixels)))
