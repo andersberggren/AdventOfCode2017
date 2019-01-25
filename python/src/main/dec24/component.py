@@ -2,9 +2,6 @@ class Component:
 	def __init__(self, ports):
 		self.ports = ports
 	
-	def __repr__(self):
-		return "Component[{}]".format("/".join([str(x) for x in self.ports]))
-	
 	def to_simple_string(self):
 		return "/".join([str(x) for x in self.ports])
 	
@@ -25,14 +22,14 @@ class ComponentChain:
 			self.available_port = parent.available_port
 	
 	def add_component(self, component):
-		if component.ports[0] == self.available_port:
-			self.attached_components.append(component)
-			self.available_port = component.ports[1]
-		elif component.ports[1] == self.available_port:
-			self.attached_components.append(component)
-			self.available_port = component.ports[0]
-		else:
-			raise ValueError("Component {c} can't connect to port {p}".format(
+		for i in range(2):
+			port = component.ports[i]
+			other_port = component.ports[(i+1)%2]
+			if port == self.available_port:
+				self.attached_components.append(component)
+				self.available_port = other_port
+				return
+		raise ValueError("Component {c} can't connect to port {p}".format(
 				c=component, p=self.available_port))
 	
 	def get_length(self):
