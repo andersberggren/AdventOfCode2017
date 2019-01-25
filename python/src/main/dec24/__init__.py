@@ -4,6 +4,9 @@ from dec24.component import Component, ComponentChain
 #############
 # Functions #
 #############
+def get_components_from_file(filename):
+	return [Component.create_from_string(s) for s in get_file_as_list_of_string(filename)]
+	
 def create_component_chains(all_components):
 	chains_to_evaluate = {ComponentChain(all_components)}
 	finished_chains = []
@@ -21,16 +24,13 @@ def create_component_chains(all_components):
 # Main #
 ########
 if __name__ == "__main__":
-	all_components = [
-		Component.create_from_string(s)
-		for s in get_file_as_list_of_string("input24.txt")
-	]
+	all_components = get_components_from_file("input24.txt")
 	chains = create_component_chains(all_components)
+	
+	# Part 1
 	strongest_chain = sorted(chains, key=lambda x: x.get_strength(), reverse=True)[0]
 	print("Strongest chain:", strongest_chain)
-	print("Strength:", strongest_chain.get_strength())
-	max_length = max([x.get_length() for x in chains])
-	longest_chains = [x for x in chains if x.get_length() == max_length]
-	strongest_longest_chain = sorted(longest_chains, key=lambda x:x.get_strength(), reverse=True)[0]
-	print("Strongest longest chain:", strongest_longest_chain)
-	print("Strength:", strongest_longest_chain.get_strength())
+	
+	# Part 2
+	longest_chain = sorted(chains, key=lambda x: (-x.get_length(), -x.get_strength()))[0]
+	print("Strongest longest chain:", longest_chain)

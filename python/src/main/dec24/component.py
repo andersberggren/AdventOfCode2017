@@ -13,20 +13,23 @@ class Component:
 		return Component(ports)
 
 class ComponentChain:
-	def __init__(self, all_components, parent=None):
-		self.all_components = all_components
+	def __init__(self, remaining_components, parent=None, component_to_attach=None):
+		self.remaining_components = list(remaining_components)
 		self.attached_components = []
 		self.available_port = 0
 		if parent is not None:
 			self.attached_components = list(parent.attached_components)
 			self.available_port = parent.available_port
+		if component_to_attach is not None:
+			self.attach_component(component_to_attach)
 	
-	def add_component(self, component):
+	def attach_component(self, component):
 		for i in range(2):
 			port = component.ports[i]
 			other_port = component.ports[(i+1)%2]
 			if port == self.available_port:
 				self.attached_components.append(component)
+				self.remaining_components.remove(component)
 				self.available_port = other_port
 				return
 		raise ValueError("Component {c} can't connect to port {p}".format(
@@ -36,19 +39,17 @@ class ComponentChain:
 		return len(self.attached_components)
 	
 	def get_strength(self):
-		return sum([sum(c.ports) for c in self.attached_components])
+		return sum(sum(c.ports) for c in self.attached_components)
 	
 	def get_successors(self):
-		successors = []
 		eligible_components_to_attach = [
-			c for c in self.all_components
-			if c not in self.attached_components and self.available_port in c.ports
+			c for c in self.remaining_components
+			if self.available_port in c.ports
 		]
-		for component in eligible_components_to_attach:
-			chain = ComponentChain(self.all_components, self)
-			chain.add_component(component)
-			successors.append(chain)
-		return successors
+		return [
+			ComponentChain(self.remaining_components, self, c)
+			for c in eligible_components_to_attach
+		]
 	
 	def __eq__(self, other):
 		return set(self.attached_components) == set(other.attached_components) \
@@ -57,10 +58,11 @@ class ComponentChain:
 	def __hash__(self):
 		value = 0
 		for c in self.attached_components:
-			value = value ^ c.__hash__()
-		value = value ^ self.available_port
+			value ^= c.__hash__()
+		value ^= self.available_port
 		return value
 		
 	def __repr__(self):
 		chain = "-".join([c.to_simple_string() for c in self.attached_components])
-		return "ComponentChain[{}]".format(chain)
+		return "ComponentChain[length={l},strength={s},components={c}]".format(
+			l=self.get_length(), s=self.get_strength(), c=chain)
