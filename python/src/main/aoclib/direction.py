@@ -20,5 +20,9 @@ class Direction:
 		return (-direction[1], direction[0])
 
 	@staticmethod
+	def get_same_direction(direction):
+		return direction
+
+	@staticmethod
 	def get_new_location(location, direction):
 		return (location[0]+direction[0], location[1]+direction[1])
