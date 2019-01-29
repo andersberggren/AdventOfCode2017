@@ -1,30 +1,27 @@
 class TuringMachine:
-	def __init__(self, initial_state):
+	def __init__(self, rules, initial_state):
 		# Dict from position to value
 		self.tape = {}
 		self.cursor = 0
-		self.state = initial_state
 		# Dict from (state, value_at_cursor) to (value_to_write, move, new_state)
-		self.rules = {}
+		self.rules = rules
+		self.state = initial_state
 	
-	def add_rule(self, current_state, value_at_cursor, value_to_write, delta_move, new_state):
-		self.rules[(current_state, value_at_cursor)] = (value_to_write, delta_move, new_state)
+	def step(self, number_of_steps=1):
+		for i in range(number_of_steps):  # @UnusedVariable
+			(value_to_write, delta_move, new_state) = self.rules[(self.state, self._read())]
+			self._write(value_to_write)
+			self.cursor += delta_move
+			self.state = new_state
 	
-	def read(self):
+	def get_diagnostic_checksum(self):
+		return len([x for x in self.tape.values() if x == 1])
+	
+	def _read(self):
 		try:
 			return self.tape[self.cursor]
 		except KeyError:
 			return 0
 	
-	def write(self, value):
+	def _write(self, value):
 		self.tape[self.cursor] = value
-	
-	def move(self, delta_move):
-		self.cursor += delta_move
-	
-	def tick(self):
-		(value_to_write, delta_move, new_state) = self.rules[(self.state, self.read())]
-		self.write(value_to_write)
-		self.move(delta_move)
-		self.state = new_state
-
