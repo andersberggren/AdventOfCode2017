@@ -5,38 +5,37 @@ from dec25.machine import TuringMachine
 
 def get_turing_machine_from_file(filename):
 	"""
-	Returns (TuringMachine, number_of_steps).
+	Returns a TuringMachine.
 	"""
-	direction_string_to_int = {"left": -1, "right": 1}
-	initial_state = None
-	number_of_steps = None
-	rules = {}
+	patterns_and_handler_functions = [
+		("Begin in state (.)",                             _set_initial_state),
+		("Perform a diagnostic checksum after (\d+) step", _set_number_of_steps),
+		("In state (.):",                                  _add_rule)
+	]
+	tm = TuringMachine()
 	lines = get_file_as_list_of_string(filename)
 	while lines:
 		line = lines.pop(0)
-		match_initial_state = re.match("Begin in state (.)", line)
-		match_number_of_steps = re.match("Perform a diagnostic checksum after (\d+) step", line)
-		match_state_rule = re.match("In state (.):", line)
-		if match_initial_state:
-			initial_state = match_initial_state.group(1)
-		elif match_number_of_steps:
-			number_of_steps = int(match_number_of_steps.group(1))
-		elif match_state_rule:
-			current_state = match_state_rule.group(1)
-			while lines:
-				line = lines.pop(0)
-				if line.strip() == "":
-					break
-				match_current_value = re.match(" *If the current value is ([01]):", line)
-				current_value = int(match_current_value.group(1))
-				line = lines.pop(0)
-				match_value_to_write = re.match(" *- Write the value ([01])", line)
-				value_to_write = int(match_value_to_write.group(1))
-				line = lines.pop(0)
-				match_move = re.match(" *- Move one slot to the (.*)\.", line)
-				move = direction_string_to_int[match_move.group(1)]
-				line = lines.pop(0)
-				match_new_state = re.match(" *- Continue with state (.)", line)
-				new_state = match_new_state.group(1)
-				rules[(current_state, current_value)] = (value_to_write, move, new_state)
-	return (TuringMachine(rules, initial_state), number_of_steps)
+		for (pattern, handler_function) in patterns_and_handler_functions:
+			match = re.match(pattern, line)
+			if match:
+				handler_function(tm, lines, match)
+				break
+	return tm
+
+def _set_initial_state(tm, lines, match):  # @UnusedVariable
+	tm.state = match.group(1)
+
+def _set_number_of_steps(tm, lines, match):  # @UnusedVariable
+	tm.number_of_steps = int(match.group(1))
+
+def _add_rule(tm, lines, match):
+	direction_string_to_int = {"left": -1, "right": 1}
+	current_state = match.group(1)
+	while lines and lines[0].strip() != "":
+		value_at_cursor = int(re.match(" *If the current value is ([01]):", lines.pop(0)).group(1))
+		value_to_write = int(re.match(" *- Write the value ([01])", lines.pop(0)).group(1))
+		move_string = re.match(" *- Move one slot to the (.*)\.", lines.pop(0)).group(1)
+		move_int = direction_string_to_int[move_string]
+		new_state = re.match(" *- Continue with state (.)", lines.pop(0)).group(1)
+		tm.add_rule(current_state, value_at_cursor, value_to_write, move_int, new_state)
