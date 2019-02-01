@@ -6,7 +6,7 @@ def get_network_from_file(filename):
 	lines = get_file_as_list_of_string(filename)
 	offset = -(len(lines) // 2)
 	for y in range(len(lines)):
-		line = lines[y].strip()
+		line = lines[y]
 		for x in range(len(line)):
 			location = (x+offset, y+offset)
 			symbol = line[x]
